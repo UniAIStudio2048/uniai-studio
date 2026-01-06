@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # Nginx 反向代理 - 统一入口
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - uniai-network
+    restart: unless-stopped
+
+  # 后端服务
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    expose:
+      - "4001"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - uniai-network
+    restart: unless-stopped
+
+  # 前端服务
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # 构建时传递 API URL
+        NEXT_PUBLIC_API_URL: /api
+    expose:
+      - "3000"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    networks:
+      - uniai-network
+    restart: unless-stopped
+
+networks:
+  uniai-network:
+    driver: bridge
