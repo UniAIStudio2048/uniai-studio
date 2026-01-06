@@ -20,7 +20,8 @@
 
 ## 📸 预览
 
-![UniAI Studio Screenshot](docs/screenshot.png)
+![UniAI Studio Screenshot]<img width="3840" height="1947" alt="c76a1410c9182c1d0cb85fe2765bfe35" src="https://github.com/user-attachments/assets/4dece1f2-df37-4d7e-b34f-482714038813" />
+
 
 ## ✨ 功能特性
 
